@@ -2,8 +2,11 @@
 <html>
 
 <head>
-    <title>ParkRun Barcode</title>
-    <link rel="icon" href="https://img1.wsimg.com/isteam/ip/bbde3b1b-93a1-4e79-ba26-9f4d2c23fffb/ALD%20Models%20Logo%202020.jpg">
+    <title>Barcode Downloader</title>
+    <meta name="description" content="Barcode Download Tool">
+    <meta name="keywords" content="barcode, download, parkrun">
+    <meta name="author" content="Your Name">
+    <meta name="copyright" content="Your Copyright, 2023">
     <style>
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -12,11 +15,6 @@
             padding: 0;
             background-color: #161819ff;
             overflow: hidden;
-        }
-
-        :root {
-            /* Colors */
-            --esp-tools-button-color: #25555C;
         }
 
         #container {
@@ -49,41 +47,10 @@
             display: block;
         }
 
-        #notSupported {
-            display: none;
-        }
-
         #logo img {
             max-width: 15%;
             height: auto;
             border-radius: 20px;
-        }
-
-        /* Background Animation */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff0080, #8000ff);
-            background-size: 200% 200%;
-            animation: gradient 5s linear infinite;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
         }
 
         .button {
@@ -134,6 +101,13 @@
             text-decoration: underline;
             margin-top: 20px; /* Add margin to the top */
         }
+
+        #startNumber,
+        #endNumber {
+            width: 50px;
+            padding: 5px;
+            margin: 5px;
+        }
     </style>
 </head>
 
@@ -142,35 +116,40 @@
         <div id="rounded-box-container">
             <div id="rounded-box">
                 <div id="logo">
-                    <img src="https://img1.wsimg.com/isteam/ip/bbde3b1b-93a1-4e79-ba26-9f4d2c23fffb/ALD%20Models%20Logo%202020.jpg"
-                        alt="ALD Models Logo">
+                    <!-- Add your logo here -->
                 </div>
-                <h1>Firmware Updater</h1>
+                <h1>Barcode Downloader</h1>
                 <div id="main">
-                    <script type="module" src="https://unpkg.com/esp-web-tools@7.3.1/dist/web/install-button.js?module"></script>
-                    <esp-web-install-button id="installButton" manifest="webflash/manifest.json"></esp-web-install-button>
+                    <label for="startNumber">Start Number:</label>
+                    <input type="number" id="startNumber" min="1" required>
                     <br>
+                    <label for="endNumber">End Number:</label>
+                    <input type="number" id="endNumber" min="1" required>
                     <br>
-                    <a class="button" style="vertical-align: middle" href="http://www.aldmodels.co.uk"><span>Visit our website</span></a>
-                    <br>
-                    <span id="noteSpan">NOTE: Make sure to close anything using your device's com port (e.g. Serial
-                        monitor)</span>
+                    <button class="button" onclick="downloadBarcodes()">Download</button>
                 </div>
-                <div class="powered-by" onclick="window.open('https://esphome.github.io/esp-web-tools/', '_blank')">Powered by ESP Web Tools</div>
+                <script>
+                    function downloadBarcodes() {
+                        var startNumber = document.getElementById('startNumber').value;
+                        var endNumber = document.getElementById('endNumber').value;
+
+                        // You can implement barcode generation logic here
+
+                        // For demonstration purposes, let's create a dummy URL
+                        var dummyURL = 'https://example.com/barcodes/' + startNumber + '-' + endNumber + '.zip';
+
+                        // Create a link element and trigger a download
+                        var downloadLink = document.createElement('a');
+                        downloadLink.href = dummyURL;
+                        downloadLink.download = 'barcodes.zip';
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                    }
+                </script>
             </div>
         </div>
     </div>
-
-    <script>
-        if ("serial" in navigator) {
-            document.getElementById("notSupported").style.display = 'none';
-            document.getElementById("main").style.display = 'block';
-        } else {
-            document.getElementById("noteSpan").innerHTML = "Your browser does not support the Updater.";
-            document.getElementById("notSupported").style.display = 'block';
-            document.getElementById("main").style.display = 'none';
-        }
-    </script>
 </body>
 
 </html>
