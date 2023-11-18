@@ -5,175 +5,259 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkrun Token Generator</title>
     <link rel="icon" href="Favicon.png" type="image/png">
-    <script src="https://cdn.jsdelivr.net/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
     <style>
-        @media print {
-            body {
-                margin: 0;
-            }
-
-            .page {
-                page-break-before: always;
-                width: 210mm;
-                height: 297mm;
-                box-sizing: border-box;
-                padding: 20mm;
-            }
-
-            .barcode {
-                width: 90mm;
-                height: 25mm;
-                display: inline-block;
-                page-break-inside: avoid;
-                position: relative;
-            }
-
-            .barcode img {
-                width: 100%;
-                height: 100%;
-            }
-        }
-
         body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        #container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-        }
-
-        #rounded-box-container {
-            display: flex;
             justify-content: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        #rounded-box {
-            background-color: #ffffff;
-            border-radius: 20px;
+        form {
+            background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
             position: relative;
-            z-index: 1;
-            max-width: 600px;
-            width: 100%;
+            overflow: hidden;
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
+        h2 {
+            margin-bottom: 10px;
         }
 
-        .button {
-            display: inline-block;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px 25px; /* Larger padding for larger buttons */
             border: none;
-            background-color: #25555C;
-            color: #FFFFFF;
-            text-align: center;
-            font-size: 15px;
-            padding: 10px;
-            width: 200px;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.5s;
-            margin: 5px;
-            font-family: sans-serif;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
         }
 
-        #cuttingBoxCheckbox {
-            margin-top: 10px;
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #2980b9;
+        }
+
+        #o {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #buttons {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        #buttons button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 50px 100px; /* Really big padding for really big buttons */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        #buttons button:hover {
+            background-color: #2980b9;
+        }
+
+        #animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2ecc71, #e74c3c, #3498db);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #o, #o * {
+                visibility: visible;
+            }
+
+            #o {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            #animated-bg {
+                display: none;
+            }
+
+            #buttons {
+                display: none;
+            }
+        }
+
+        /* Add a class to show the animated background when UI is enabled */
+        .ui-enabled #animated-bg {
+            display: block;
+        }
+
+        .warning {
+            color: #e74c3c;
+            font-size: 16px;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <div id="rounded-box">
-            <h1>Parkrun Token Generator</h1>
-            <form onsubmit="generateAndPrint(); return false;">
-                Enter start position:
-                <input type="number" id="startNumber" min="1" required>
-                Enter end position:
-                <input type="number" id="endNumber" min="1" required>
-                <br>
-                <input type="button" class="button" value="Generate and Print" onclick="generateAndPrint()">
-                <input type="button" class="button" value="Clear" onclick="clearBarcodes()">
-            </form>
-            <div id='o'></div>
-        </div>
+    <div id="animated-bg"></div>
+
+    <div id="buttons">
+        <button id="backButton" onclick="clearResults()">Back</button>
+        <button id="printButton" onclick="printResults()">Print</button>
     </div>
 
-    <script>
-        function generateAndPrint() {
-            var startNumber = parseInt(document.getElementById('startNumber').value);
-            var endNumber = parseInt(document.getElementById('endNumber').value);
+    <form class="noPrint" action="javascript:void(0);" method="get" name="f">
+        <h2>Missing position token printing</h2>
+        <label for="startNumber">Start Position:</label>
+        <input type="text" id="startNumber" name="start" value="123" required>
 
-            if (isNaN(startNumber) || isNaN(endNumber) || startNumber > endNumber) {
-                alert("Invalid input. Please enter valid start and end numbers.");
+        <label for="endNumber">End Position:</label>
+        <input type="text" id="endNumber" name="end" value="789" required>
+
+        <input type="submit" value="Submit" onclick="checkInput()">
+        <div id="warningStart" class="warning"></div>
+        <div id="warningEnd" class="warning"></div>
+    </form>
+    
+    <div id="o"></div>
+
+    <script>
+        function hideUI() {
+            var form = document.querySelector('form');
+            form.style.display = 'none';
+            form.classList.add('ui-enabled'); // Add class to enable animated background
+            showButtons();
+        }
+
+        function showUI() {
+            var form = document.querySelector('form');
+            form.style.display = 'block';
+            form.classList.remove('ui-enabled'); // Remove class to disable animated background
+            hideButtons();
+        }
+
+        function showButtons() {
+            var buttons = document.getElementById('buttons');
+            buttons.style.display = 'flex';
+        }
+
+        function hideButtons() {
+            var buttons = document.getElementById('buttons');
+            buttons.style.display = 'none';
+        }
+
+        function clearResults() {
+            var div = document.getElementById('o');
+            div.innerHTML = '';
+            div.style.opacity = '0';
+            showUI(); // Show the UI when clearing results
+        }
+
+        function printResults() {
+            window.print();
+        }
+
+        function checkInput() {
+            var startNumber = document.getElementById('startNumber').value;
+            var endNumber = document.getElementById('endNumber').value;
+            var warningStart = document.getElementById('warningStart');
+            var warningEnd = document.getElementById('warningEnd');
+
+            warningStart.textContent = '';
+            warningEnd.textContent = '';
+
+            if (!isValidNumber(startNumber)) {
+                warningStart.textContent = 'Please enter a valid number greater than 0.';
+                return;
+            }
+
+            if (!isValidNumber(endNumber)) {
+                warningEnd.textContent = 'Please enter a valid number greater than 0.';
+                return;
+            }
+
+            var start = parseInt(startNumber);
+            var end = parseInt(endNumber);
+
+            if (start > end) {
+                warningStart.textContent = 'Start position should be less than or equal to End position.';
                 return;
             }
 
             var div = document.getElementById('o');
-            div.innerHTML = '';
+            div.style.opacity = '1';
 
-            var pageCount = 0;
-            for (var i = startNumber; i <= endNumber; i++) {
-                if (i % 8 === 1) {
-                    // Start a new page every 8 barcodes
-                    pageCount++;
-                    div.innerHTML += '<div class="page">';
-                }
+            hideUI(); // Hide the UI when processing results
 
-                var barcodeId = 'barcode' + i;
-                var barcodeImage = '<div class="barcode">' +
-                    '<img id="' + barcodeId + '">' +
-                    '</div>';
-                div.innerHTML += barcodeImage;
-
-                JsBarcode("#" + barcodeId, 'P' + ('0000' + i).slice(-4), { format: "CODE128", displayValue: false });
-
-                if (i % 8 === 0) {
-                    // Close the current page after every 8 barcodes
-                    div.innerHTML += '</div>';
-                }
+            for (var i = start; i <= end; i++) {
+                var x = '0000' + i;
+                div.innerHTML += '<img src=\'http://results-service.parkrun.com/runnerSupport/BarcodeImagery/image.php?code=P' + x.substr(x.length - 4) + '\'><br>';
             }
 
-            // If the last page is not closed, close it
-            if ((endNumber - startNumber + 1) % 8 !== 0) {
-                div.innerHTML += '</div>';
-            }
-
-            // Automatically show cutting boxes
-            showCuttingBoxes();
-
-            // Initiate the print action
-            window.print();
+            showButtons(); // Show buttons when barcodes are generated
         }
 
-        function clearBarcodes() {
-            var div = document.getElementById('o');
-            div.innerHTML = '';
-        }
-
-        // Function to toggle cutting box visibility
-        document.getElementById('cuttingBoxCheckbox').addEventListener('change', function () {
-            showCuttingBoxes();
-        });
-
-        function showCuttingBoxes() {
-            var cuttingBoxes = document.querySelectorAll('.cuttingBox');
-            for (var i = 0; i < cuttingBoxes.length; i++) {
-                if (document.getElementById('cuttingBoxCheckbox').checked) {
-                    cuttingBoxes[i].style.display = 'block';
-                } else {
-                    cuttingBoxes[i].style.display = 'none';
-                }
-            }
+        function isValidNumber(value) {
+            return !isNaN(value) && parseInt(value) > 0;
         }
     </script>
 </body>
