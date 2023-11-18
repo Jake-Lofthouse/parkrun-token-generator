@@ -287,6 +287,12 @@
         function isValidNumber(value) {
             return !isNaN(value) && parseInt(value) > 0;
         }
+        
+         if (start > 9999 || end > 9999) {
+            warningStart.textContent = 'Please enter a number less than or equal to 9999.';
+            return;
+        }
+        
     </script>
     
 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="jakelofthouse" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
