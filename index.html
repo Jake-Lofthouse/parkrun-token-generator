@@ -61,7 +61,14 @@
         input[type="submit"]:hover, input[type="button"]:hover {
             background-color: #2980b9;
         }
-
+#uiCopyright {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
         #o {
             margin-top: 20px;
             display: flex;
@@ -158,6 +165,7 @@
     </style>
 </head>
 <body>
+
     <div id="animated-bg"></div>
 
     <div id="buttons">
@@ -179,6 +187,11 @@
     </form>
     
     <div id="o"></div>
+        <div id="uiCopyright">
+        &copy; 2023 Jake Lofthouse ALD Print LTD |
+        <a href="https://www.aldprint.co.uk" target="_blank">www.aldprint.co.uk</a>
+    </div>
+
 
     <script>
         function hideUI() {
@@ -260,5 +273,7 @@
             return !isNaN(value) && parseInt(value) > 0;
         }
     </script>
+    
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="jakelofthouse" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 </body>
 </html>
