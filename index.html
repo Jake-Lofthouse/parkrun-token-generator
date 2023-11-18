@@ -86,6 +86,12 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
+            #tt {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         #buttons {
             display: none;
@@ -190,7 +196,7 @@
 
     <form class="noPrint" action="javascript:void(0);" method="get" name="f">
         <h2>Missing position token printing</h2>
-        
+    <div id="tt"></div>
         <label for="startNumber">Start Position:</label>
         <input type="text" id="startNumber" name="start" value="1" required>
 
