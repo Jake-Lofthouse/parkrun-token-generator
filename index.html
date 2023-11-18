@@ -3,10 +3,6 @@
 
 <head>
     <title>Barcode Downloader</title>
-    <meta name="description" content="Barcode Download Tool">
-    <meta name="keywords" content="barcode, download, parkrun">
-    <meta name="author" content="Your Name">
-    <meta name="copyright" content="Your Copyright, 2023">
     <!-- Include jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
@@ -49,12 +45,6 @@
             display: block;
         }
 
-        #logo img {
-            max-width: 15%;
-            height: auto;
-            border-radius: 20px;
-        }
-
         .button {
             display: inline-block;
             border: none;
@@ -69,31 +59,6 @@
             transition: all 0.5s;
             margin: 5px;
             font-family: sans-serif;
-        }
-
-        .button span {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: 0.5s;
-        }
-
-        .button span:after {
-            content: '\00bb';
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            right: -20px;
-            transition: 0.5s;
-        }
-
-        .button:hover span {
-            padding-right: 25px;
-        }
-
-        .button:hover span:after {
-            opacity: 1;
-            right: 0;
         }
 
         .powered-by {
@@ -117,9 +82,6 @@
     <div id="container">
         <div id="rounded-box-container">
             <div id="rounded-box">
-                <div id="logo">
-                    <!-- Add your logo here -->
-                </div>
                 <h1>Barcode Downloader</h1>
                 <div id="main">
                     <label for="startNumber">Start Number:</label>
@@ -132,8 +94,6 @@
                 </div>
                 <script>
                     function generateBarcodes(start, end) {
-                        // Replace this logic with your actual barcode generation logic
-                        // For demonstration purposes, using a simple text representation
                         const barcodes = [];
                         for (let i = start; i <= end; i++) {
                             barcodes.push(`Barcode ${i}`);
@@ -152,13 +112,11 @@
 
                         const barcodes = generateBarcodes(startNumber, endNumber);
 
-                        // Generate PDF
                         const pdf = new jsPDF();
 
                         let x = 10;
                         let y = 10;
-                        const barcodeWidth = 50;
-                        const barcodeHeight = 30;
+                        const barcodeHeight = 10;
 
                         for (let i = 0; i < barcodes.length; i++) {
                             pdf.text(barcodes[i], x, y);
@@ -169,11 +127,10 @@
                                 x = 10;
                                 y += 10;
                             } else {
-                                x += barcodeWidth + 20;
+                                x += 50; // Adjust this value for spacing
                             }
                         }
 
-                        // Save PDF
                         pdf.save('barcodes.pdf');
                     }
                 </script>
