@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkrun Token Generator</title>
-    <script main="JsBarcode.js"></script>
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
     <style>
         @media print {
             body {
@@ -147,6 +147,9 @@
                 div.innerHTML += '</div>';
             }
 
+            // Automatically show cutting boxes
+            showCuttingBoxes();
+
             // Initiate the print action
             window.print();
         }
@@ -154,6 +157,22 @@
         function clearBarcodes() {
             var div = document.getElementById('o');
             div.innerHTML = '';
+        }
+
+        // Function to toggle cutting box visibility
+        document.getElementById('cuttingBoxCheckbox').addEventListener('change', function () {
+            showCuttingBoxes();
+        });
+
+        function showCuttingBoxes() {
+            var cuttingBoxes = document.querySelectorAll('.cuttingBox');
+            for (var i = 0; i < cuttingBoxes.length; i++) {
+                if (document.getElementById('cuttingBoxCheckbox').checked) {
+                    cuttingBoxes[i].style.display = 'block';
+                } else {
+                    cuttingBoxes[i].style.display = 'none';
+                }
+            }
         }
     </script>
 </body>
