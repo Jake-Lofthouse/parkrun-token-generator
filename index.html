@@ -7,6 +7,7 @@
     <meta name="keywords" content="barcode, download, parkrun">
     <meta name="author" content="Your Name">
     <meta name="copyright" content="Your Copyright, 2023">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -39,7 +40,7 @@
         }
 
         h1 {
-            color: #333; /* Set text color back to the original color */
+            color: #333;
             margin-bottom: 20px;
         }
 
@@ -96,10 +97,10 @@
 
         .powered-by {
             font-size: 12px;
-            color: #25555C; /* Set text color to button color */
+            color: #25555C;
             cursor: pointer;
             text-decoration: underline;
-            margin-top: 20px; /* Add margin to the top */
+            margin-top: 20px;
         }
 
         #startNumber,
@@ -129,22 +130,50 @@
                     <button class="button" onclick="downloadBarcodes()">Download</button>
                 </div>
                 <script>
+                    function generateBarcodes(start, end) {
+                        // Replace this logic with your actual barcode generation logic
+                        // For demonstration purposes, using a simple text representation
+                        const barcodes = [];
+                        for (let i = start; i <= end; i++) {
+                            barcodes.push(`Barcode ${i}`);
+                        }
+                        return barcodes;
+                    }
+
                     function downloadBarcodes() {
-                        var startNumber = document.getElementById('startNumber').value;
-                        var endNumber = document.getElementById('endNumber').value;
+                        const startNumber = parseInt(document.getElementById('startNumber').value);
+                        const endNumber = parseInt(document.getElementById('endNumber').value);
 
-                        // You can implement barcode generation logic here
+                        if (isNaN(startNumber) || isNaN(endNumber) || startNumber > endNumber) {
+                            alert("Invalid input. Please enter valid start and end numbers.");
+                            return;
+                        }
 
-                        // For demonstration purposes, let's create a dummy URL
-                        var dummyURL = 'https://example.com/barcodes/' + startNumber + '-' + endNumber + '.zip';
+                        const barcodes = generateBarcodes(startNumber, endNumber);
 
-                        // Create a link element and trigger a download
-                        var downloadLink = document.createElement('a');
-                        downloadLink.href = dummyURL;
-                        downloadLink.download = 'barcodes.zip';
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        document.body.removeChild(downloadLink);
+                        // Generate PDF
+                        const pdf = new jsPDF();
+
+                        let x = 10;
+                        let y = 10;
+                        const barcodeWidth = 50;
+                        const barcodeHeight = 30;
+
+                        for (let i = 0; i < barcodes.length; i++) {
+                            pdf.text(barcodes[i], x, y);
+                            y += barcodeHeight + 10;
+
+                            // Start a new row after 3 barcodes
+                            if ((i + 1) % 3 === 0) {
+                                x = 10;
+                                y += 10;
+                            } else {
+                                x += barcodeWidth + 20;
+                            }
+                        }
+
+                        // Save PDF
+                        pdf.save('barcodes.pdf');
                     }
                 </script>
             </div>
