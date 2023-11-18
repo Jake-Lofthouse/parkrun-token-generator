@@ -1,142 +1,17 @@
-<!DOCTYPE html>
 <html>
-
 <head>
-    <title>Barcode Downloader</title>
-    <!-- Include jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #161819ff;
-            overflow: hidden;
-        }
-
-        #container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #rounded-box-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        #rounded-box {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        #main {
-            display: block;
-        }
-
-        .button {
-            display: inline-block;
-            border: none;
-            background-color: #25555C;
-            color: #FFFFFF;
-            text-align: center;
-            font-size: 15px;
-            padding: 10px;
-            width: 200px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.5s;
-            margin: 5px;
-            font-family: sans-serif;
-        }
-
-        .powered-by {
-            font-size: 12px;
-            color: #25555C;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-top: 20px;
-        }
-
-        #startNumber,
-        #endNumber {
-            width: 50px;
-            padding: 5px;
-            margin: 5px;
-        }
-    </style>
+<title>
+Spare Token Printer
+</title>
 </head>
-
+<style>@media print{.noPrint{display:none;}}</style>
 <body>
-    <div id="container">
-        <div id="rounded-box-container">
-            <div id="rounded-box">
-                <h1>Barcode Downloader</h1>
-                <div id="main">
-                    <label for="startNumber">Start Number:</label>
-                    <input type="number" id="startNumber" min="1" required>
-                    <br>
-                    <label for="endNumber">End Number:</label>
-                    <input type="number" id="endNumber" min="1" required>
-                    <br>
-                    <button class="button" onclick="downloadBarcodes()">Download</button>
-                </div>
-                <script>
-                    function generateBarcodes(start, end) {
-                        const barcodes = [];
-                        for (let i = start; i <= end; i++) {
-                            barcodes.push(`Barcode ${i}`);
-                        }
-                        return barcodes;
-                    }
-
-                    function downloadBarcodes() {
-                        const startNumber = parseInt(document.getElementById('startNumber').value);
-                        const endNumber = parseInt(document.getElementById('endNumber').value);
-
-                        if (isNaN(startNumber) || isNaN(endNumber) || startNumber > endNumber) {
-                            alert("Invalid input. Please enter valid start and end numbers.");
-                            return;
-                        }
-
-                        const barcodes = generateBarcodes(startNumber, endNumber);
-
-                        const pdf = new jsPDF();
-
-                        let x = 10;
-                        let y = 10;
-                        const barcodeHeight = 10;
-
-                        for (let i = 0; i < barcodes.length; i++) {
-                            pdf.text(barcodes[i], x, y);
-                            y += barcodeHeight + 10;
-
-                            // Start a new row after 3 barcodes
-                            if ((i + 1) % 3 === 0) {
-                                x = 10;
-                                y += 10;
-                            } else {
-                                x += 50; // Adjust this value for spacing
-                            }
-                        }
-
-                        pdf.save('barcodes.pdf');
-                    }
-                </script>
-            </div>
-        </div>
-    </div>
+<form class="noPrint" action="javaScript:var text=f.n.value;var div=document.getElementById('o');codes=f.n.value.match(/(\d[\d\.]*)/g);codes.forEach(function(e){x='0000'+e;div.innerHTML=div.innerHTML+'<img src=\'http://results-service.parkrun.com/runnerSupport/BarcodeImagery/image.php?code=P'+x.substr(x.length-4)+'\'><br>'});" method="get" name="f">
+Missing position token printing <br/>Enter position NUMBER(s) and click "Go" 
+<input type="text" name="n" value="123 456 789" size="30">
+<input type="submit" value="Go">
+<INPUT TYPE="button" NAME="clear" Value="Clear" onClick="var div=document.getElementById('o');div.innerHTML='';">
+</form>
+<div id='o'></div>
 </body>
-
 </html>
