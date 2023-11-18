@@ -1,17 +1,59 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<title>
-Spare Token Printer
-</title>
+    <title>Spare Token Printer</title>
+    <style>
+        @media print {
+            .noPrint {
+                display: none;
+            }
+        }
+    </style>
 </head>
-<style>@media print{.noPrint{display:none;}}</style>
+
 <body>
-<form class="noPrint" action="javaScript:var text=f.n.value;var div=document.getElementById('o');codes=f.n.value.match(/(\d[\d\.]*)/g);codes.forEach(function(e){x='0000'+e;div.innerHTML=div.innerHTML+'<img src=\'http://results-service.parkrun.com/runnerSupport/BarcodeImagery/image.php?code=P'+x.substr(x.length-4)+'\'><br>'});" method="get" name="f">
-Missing position token printing <br/>Enter position NUMBER(s) and click "Go" 
-<input type="text" name="n" value="123 456 789" size="30">
-<input type="submit" value="Go">
-<INPUT TYPE="button" NAME="clear" Value="Clear" onClick="var div=document.getElementById('o');div.innerHTML='';">
-</form>
-<div id='o'></div>
+    <form class="noPrint" onsubmit="generateBarcodes(); return false;">
+        Missing position token printing <br />
+        Enter start position:
+        <input type="number" id="startNumber" min="1" required>
+        Enter end position:
+        <input type="number" id="endNumber" min="1" required>
+        <input type="submit" value="Generate Barcodes">
+        <button onclick="printBarcodes()">Print Barcodes</button>
+        <input type="button" name="clear" value="Clear" onclick="clearBarcodes()">
+    </form>
+    <div id='o'></div>
+
+    <script>
+        function generateBarcodes() {
+            var startNumber = parseInt(document.getElementById('startNumber').value);
+            var endNumber = parseInt(document.getElementById('endNumber').value);
+
+            if (isNaN(startNumber) || isNaN(endNumber) || startNumber > endNumber) {
+                alert("Invalid input. Please enter valid start and end numbers.");
+                return;
+            }
+
+            var div = document.getElementById('o');
+            div.innerHTML = '';
+
+            for (var i = startNumber; i <= endNumber; i++) {
+                var paddedNumber = '0000' + i;
+                var barcodeImage = '<img src=\'http://results-service.parkrun.com/runnerSupport/BarcodeImagery/image.php?code=P' + paddedNumber.substr(paddedNumber.length - 4) + '\'><br>';
+                div.innerHTML += barcodeImage;
+            }
+        }
+
+        function printBarcodes() {
+            window.print();
+        }
+
+        function clearBarcodes() {
+            var div = document.getElementById('o');
+            div.innerHTML = '';
+        }
+    </script>
 </body>
+
 </html>
