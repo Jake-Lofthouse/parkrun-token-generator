@@ -294,7 +294,18 @@
         function isValidNumber(value) {
             return !isNaN(value) && parseInt(value) > 0;
         }
-        
+    function backButtonPressed() {
+        // Recover the values that the user inputted before pressing submit
+        var startNumber = document.getElementById('startNumber').value;
+        var endNumber = document.getElementById('endNumber').value;
+
+        // Set the recovered values back to the input fields
+        document.getElementById('startNumber').value = startNumber;
+        document.getElementById('endNumber').value = endNumber;
+
+        clearResults(); // Clear results as per your existing logic
+    }
+    </script>
     </script>
     
 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="jakelofthouse" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
