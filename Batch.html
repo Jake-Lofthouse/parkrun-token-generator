@@ -183,6 +183,25 @@
             max-zoom: 1.0 !important;
             min-zoom: 1.0 !important;
         }
+
+        #homeButton {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #3498db;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 3; /* Ensure the home button is above other elements */
+            transition: background-color 0.3s;
+        }
+
+        #homeButton:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
@@ -214,8 +233,14 @@
         <a href="https://www.aldprint.co.uk" target="_blank">www.aldprint.co.uk</a>
     </div>
 
-
+    <button id="homeButton" onclick="goHome()">Home</button>
     <script>
+
+    function goHome() {
+        // Redirect the user to the specified URL
+        window.location.href = "https://ald-models.github.io/ParkRun-Barcode/";
+    }
+        
         function hideUI() {
             var form = document.querySelector('form');
             form.style.display = 'none';
