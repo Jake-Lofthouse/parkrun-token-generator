@@ -92,10 +92,17 @@
 
         .delete-button {
             cursor: pointer;
-            color: #e74c3c;
+            color: #fff;
+            background-color: #e74c3c; /* Red background color */
             border: none;
-            background: none;
             font-size: 14px;
+            padding: 8px 12px; /* Adjust padding as needed */
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b; /* Darker red on hover */
         }
 
         #uiCopyright {
@@ -333,34 +340,38 @@
 
     function goBack() {
         // Reset to the initial state
-        var form = document.querySelector('form');
-        form.style.display = 'block';
+    var form = document.querySelector('form');
+    form.style.display = 'block';
 
-        var printButton = document.getElementById('printButton');
-        printButton.style.display = 'none';
+    var printButton = document.getElementById('printButton');
+    printButton.style.display = 'none';
 
-        var backButton = document.getElementById('backButton');
-        backButton.style.display = 'none';
+    var backButton = document.getElementById('backButton');
+    backButton.style.display = 'none';
 
-        var div = document.getElementById('o');
-        div.innerHTML = '';
+    var div = document.getElementById('o');
+    div.innerHTML = '';
 
-        // Show coffee and copyright
-        var coffee = document.createElement('script');
-        coffee.setAttribute('data-name', 'BMC-Widget');
-        coffee.setAttribute('data-cfasync', 'false');
-        coffee.setAttribute('src', 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js');
-        coffee.setAttribute('data-id', 'jakelofthouse');
-        coffee.setAttribute('data-description', 'Support me on Buy me a coffee!');
-        coffee.setAttribute('data-message', '');
-        coffee.setAttribute('data-color', '#40DCA5');
-        coffee.setAttribute('data-position', 'Right');
-        coffee.setAttribute('data-x_margin', '18');
-        coffee.setAttribute('data-y_margin', '18');
-        document.body.appendChild(coffee);
+    // Show coffee and copyright
+    var coffee = document.createElement('script');
+    coffee.setAttribute('data-name', 'BMC-Widget');
+    coffee.setAttribute('data-cfasync', 'false');
+    coffee.setAttribute('src', 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js');
+    coffee.setAttribute('data-id', 'jakelofthouse');
+    coffee.setAttribute('data-description', 'Support me on Buy me a coffee!');
+    coffee.setAttribute('data-message', '');
+    coffee.setAttribute('data-color', '#40DCA5');
+    coffee.setAttribute('data-position', 'Right');
+    coffee.setAttribute('data-x_margin', '18');
+    coffee.setAttribute('data-y_margin', '18');
+    document.body.appendChild(coffee);
 
-        var copyright = document.getElementById('uiCopyright');
-        copyright.style.display = 'block';
+    var copyright = document.getElementById('uiCopyright');
+    copyright.style.display = 'block';
+
+    // Enable the input box
+    var input = document.getElementById('tokenInput');
+    input.disabled = false;
     }
 
     function printBarcodes() {
