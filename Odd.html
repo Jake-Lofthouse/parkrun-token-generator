@@ -73,6 +73,31 @@
             background-color: #2980b9;
         }
 
+        .token-list {
+            display: flex;
+            flex-direction: column;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .token-list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .token-list-item span {
+            margin-right: 8px;
+        }
+
+        .delete-button {
+            cursor: pointer;
+            color: #e74c3c;
+            border: none;
+            background: none;
+            font-size: 14px;
+        }
+
         #uiCopyright {
             position: fixed;
             bottom: 10px;
@@ -90,20 +115,6 @@
             align-items: flex-start;
             opacity: 0;
             transition: opacity 0.5s ease;
-        }
-
-        #tt {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        #ii {
-            margin-left: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
         #buttons {
@@ -130,18 +141,18 @@
             background-color: #2980b9;
         }
 
-#animated-bg {
-    /* ... other styles ... */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #3498db, #2ecc71, #e74c3c, #3498db);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    z-index: -1; /* Ensure the background is at a lower stacking order */
-}
+        #animated-bg {
+            /* ... other styles ... */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2ecc71, #e74c3c, #3498db);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: -1; /* Ensure the background is at a lower stacking order */
+        }
 
         @keyframes gradient {
             0% {
@@ -203,9 +214,10 @@
 
 <form class="noPrint" action="javascript:void(0);" method="get" name="f">
     <h1>Missing position token printing</h1>
-    <p>Enter position NUMBER(s) and click "Submit"</p>
+    <p>Input numbers, then press Enter. Once finished, click on Submit to generate the print file.</p>
     <label for="tokenInput">Token Numbers:</label>
-    <input type="text" id="tokenInput" name="n" value="123 456 789" size="30">
+    <div id="tokenList" class="token-list"></div>
+    <input type="text" id="tokenInput" name="n" size="4" maxlength="4" onkeydown="handleTokenInput(event)">
     <input type="submit" value="Submit" onclick="generateBarcodes();">
 </form>
 
@@ -216,22 +228,65 @@
 </div>
 
 <div id="buttons">
-    <input type="button" id="backButton" onclick="goBack()" value="Back" style="display: none;">
-    
+    <input type="button" id="backButton" onclick="goBack()" value="Back" style="display: none; font-size: 45px; margin-right: 10px; ">
+
     <div id="ii"></div>
-    <input type="button" id="printButton" onclick="printBarcodes()" value="Print" style="display: none;">
+    <input type="button" id="printButton" onclick="printBarcodes()" value="Print" style="display: none; font-size: 45px;">
 </div>
 
 <script>
+    function handleTokenInput(event) {
+        if (event.key === "Tab" || event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            addTokenToList();
+        } else if (!/^\d+$/.test(event.key)) {
+            event.preventDefault();
+        }
+    }
+
+    function addTokenToList() {
+        var input = document.getElementById('tokenInput');
+        var tokenList = document.getElementById('tokenList');
+
+        var token = input.value.trim();
+        if (token !== "") {
+            var listItem = document.createElement('div');
+            listItem.className = 'token-list-item';
+
+            var tokenSpan = document.createElement('span');
+            tokenSpan.textContent = token;
+            listItem.appendChild(tokenSpan);
+
+            var deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function () {
+                listItem.remove();
+            };
+            listItem.appendChild(deleteButton);
+
+            tokenList.appendChild(listItem);
+
+            // Scroll to the bottom of the list
+            tokenList.scrollTop = tokenList.scrollHeight;
+
+            // Clear input after adding to the list
+            input.value = "";
+        }
+    }
+
     function generateBarcodes() {
         var div = document.getElementById('o');
-        var input = document.getElementById('tokenInput');
-        var codes = input.value.match(/(\d[\d\.]*)/g);
+        var tokenList = document.getElementById('tokenList');
+        var tokens = Array.from(tokenList.getElementsByClassName('token-list-item'))
+            .map(function (item) {
+                return item.firstChild.textContent;
+            });
 
-        if (codes && codes.length > 0) {
+        if (tokens.length > 0) {
             div.innerHTML = '';
-            codes.forEach(function(e) {
-                var x = '0000' + e;
+            tokens.forEach(function (token) {
+                var x = '0000' + token;
                 div.innerHTML = div.innerHTML + '<img src=\'http://results-service.parkrun.com/runnerSupport/BarcodeImagery/image.php?code=P' + x.substr(x.length - 4) + '\'><br>';
             });
 
@@ -249,8 +304,6 @@
             var coffee = document.querySelector('script[data-name="BMC-Widget"]');
             coffee.parentNode.removeChild(coffee);
 
-            var copyright = document.getElementById('uiCopyright');
-            copyright.style.display = 'none';
         }
     }
 
