@@ -208,12 +208,30 @@
             max-zoom: 1.0 !important;
             min-zoom: 1.0 !important;
         }
+                #homeButton {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #3498db;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 3; /* Ensure the home button is above other elements */
+            transition: background-color 0.3s;
+        }
+
+        #homeButton:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
 
 <form class="noPrint" action="javascript:void(0);" method="get" name="f">
-    <h1>Missing position token printing</h1>
+    <h1>Arbitrary Numbers' Position Token Printing</h1>
     <p>Input numbers, then press Enter. Once finished, click on Submit to generate the print file.</p>
     <label for="tokenInput">Token Numbers:</label>
     <div id="tokenList" class="token-list"></div>
@@ -233,8 +251,14 @@
     <div id="ii"></div>
     <input type="button" id="printButton" onclick="printBarcodes()" value="Print" style="display: none; font-size: 45px;">
 </div>
-
+<button id="homeButton" onclick="goHome()">Home</button>
 <script>
+
+    function goHome() {
+        // Redirect the user to the specified URL
+        window.location.href = "https://ald-models.github.io/ParkRun-Barcode/";
+    }
+    
     function handleTokenInput(event) {
         if (event.key === "Tab" || event.key === "Enter" || event.key === " ") {
             event.preventDefault();
