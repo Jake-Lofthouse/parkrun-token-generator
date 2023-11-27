@@ -14,74 +14,121 @@
     <meta name="rating" content="Safe For Kids">
     <link rel="icon" href="https://img1.wsimg.com/isteam/ip/26109d27-db8c-4e78-add2-d2a1d75d0f13/Favicon%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:100,h:100,cg:true">
     <style>
-    
-    body {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             overflow: hidden;
-            background: #f0f0f0; /* Fallback color */
-            background: linear-gradient(45deg, #3498db, #2ecc71, #e74c3c, #3498db);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
         }
 
-        h1 {
-            color: #fff;
-            text-align: center;
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
         }
-        
-        #uiCopyright {
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px 25px; /* Larger padding for larger buttons */
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #2980b9;
+        }
+#uiCopyright {
             position: fixed;
             bottom: 10px;
             left: 10px;
             font-size: 14px;
             color: #666;
         }
+        
+        #o {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+            #tt {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-button {
-  border-radius: 4px;
-  background-color: #3498db;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 300px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
+        #buttons {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
 
-button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
+        #buttons button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 50px 100px; /* Really big padding for really big buttons */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
 
-button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
+        #buttons button:hover {
+            background-color: #2980b9;
+        }
 
-button:hover span {
-  padding-right: 25px;
-}
-
-button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
+        #animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2ecc71, #e74c3c, #3498db);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: 0;
+        }
 
         @keyframes gradient {
             0% {
@@ -94,32 +141,173 @@ button:hover span:after {
                 background-position: 0% 50%;
             }
         }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #o, #o * {
+                visibility: visible;
+            }
+
+            #o {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            #animated-bg {
+                display: none;
+            }
+
+            #buttons {
+                display: none;
+            }
+        }
+
+        /* Add a class to show the animated background when UI is enabled */
+        .ui-enabled #animated-bg {
+            display: block;
+        }
+
+        .warning {
+            color: #e74c3c;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        
+        @viewport {
+            zoom: 1.0 !important;
+            user-zoom: fixed !important;
+            max-zoom: 1.0 !important;
+            min-zoom: 1.0 !important;
+        }
     </style>
 </head>
 <body>
-            <div id="uiCopyright">
+
+    <div id="animated-bg"></div>
+
+    <div id="buttons">
+        <button id="backButton" onclick="clearResults()">Back</button>
+        <button id="printButton" onclick="printResults()">Print</button>
+    </div>
+
+    <form class="noPrint" action="javascript:void(0);" method="get" name="f">
+        <h2>Missing position token printing</h2>
+    <div id="tt"></div>
+        <label for="startNumber">Start Position:</label>
+        <input type="text" id="startNumber" name="start" value="1" required>
+
+        <label for="endNumber">End Position:</label>
+        <input type="text" id="endNumber" name="end" value="50" required>
+
+        <input type="submit" value="Submit" onclick="checkInput()">
+        <div id="warningStart" class="warning"></div>
+        <div id="warningEnd" class="warning"></div>
+    </form>
+    
+    <div id="o"></div>
+        <div id="uiCopyright">
         &copy; 2023 Jake Lofthouse ALD Print Ltd |
         <a href="https://www.aldprint.co.uk" target="_blank">www.aldprint.co.uk</a>
     </div>
-    
-    <div id="animated-bg"></div>
 
-    <div>
-        <h1>Select one of the options below:</h1>
-
-<button id="batchButton" onclick="goToBatch()"><span>Batch Production</span></button>
-<button id="oddButton" onclick="goToOdd()"><span>Weird Numbers</span></button>
-
-    </div>
 
     <script>
-        function goToBatch() {
-            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
+        function hideUI() {
+            var form = document.querySelector('form');
+            form.style.display = 'none';
+            form.classList.add('ui-enabled'); // Add class to enable animated background
+            showButtons();
         }
 
-        function goToOdd() {
-            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Odd";
+        function showUI() {
+            var form = document.querySelector('form');
+            form.style.display = 'block';
+            form.classList.remove('ui-enabled'); // Remove class to disable animated background
+            hideButtons();
         }
+
+        function showButtons() {
+            var buttons = document.getElementById('buttons');
+            buttons.style.display = 'flex';
+        }
+
+        function hideButtons() {
+            var buttons = document.getElementById('buttons');
+            buttons.style.display = 'none';
+        }
+
+        function clearResults() {
+            var div = document.getElementById('o');
+            div.innerHTML = '';
+            div.style.opacity = '0';
+            showUI(); // Show the UI when clearing results
+        }
+
+        function printResults() {
+            window.print();
+        }
+
+        function checkInput() {
+            var startNumber = document.getElementById('startNumber').value;
+            var endNumber = document.getElementById('endNumber').value;
+            var warningStart = document.getElementById('warningStart');
+            var warningEnd = document.getElementById('warningEnd');
+
+            warningStart.textContent = '';
+            warningEnd.textContent = '';
+
+            if (!isValidNumber(startNumber)) {
+                warningStart.textContent = 'Please enter a valid number greater than 0.';
+                return;
+            }
+
+            if (!isValidNumber(endNumber)) {
+                warningEnd.textContent = 'Please enter a valid number greater than 0.';
+                return;
+            }
+
+            var start = parseInt(startNumber);
+            var end = parseInt(endNumber);
+
+            if (start > end) {
+                warningStart.textContent = 'Start position should be less than or equal to End position.';
+                return;
+            }
+
+            var div = document.getElementById('o');
+            div.style.opacity = '1';
+
+            hideUI(); // Hide the UI when processing results
+
+            for (var i = start; i <= end; i++) {
+                var x = '0000' + i;
+                div.innerHTML += '<img src=\'http://results-service.parkrun.com/runnerSupport/BarcodeImagery/image.php?code=P' + x.substr(x.length - 4) + '\'><br>';
+            }
+
+            showButtons(); // Show buttons when barcodes are generated
+        }
+
+        function isValidNumber(value) {
+            return !isNaN(value) && parseInt(value) > 0;
+        }
+    function backButtonPressed() {
+        // Recover the values that the user inputted before pressing submit
+        var startNumber = document.getElementById('startNumber').value;
+        var endNumber = document.getElementById('endNumber').value;
+
+        // Set the recovered values back to the input fields
+        document.getElementById('startNumber').value = startNumber;
+        document.getElementById('endNumber').value = endNumber;
+
+        clearResults(); // Clear results as per your existing logic
+    }
     </script>
+    </script>
+    
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="jakelofthouse" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 </body>
 </html>
