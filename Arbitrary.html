@@ -241,10 +241,10 @@
 </form>
 
 <div id="o"></div>
-<div id="uiCopyright">
-    &copy; 2023 Jake Lofthouse ALD Print Ltd |
-    <a href="https://www.aldprint.co.uk" target="_blank">www.aldprint.co.uk</a>
-</div>
+    <div id="uiCopyright">
+        &copy; <span id="copyrightYear"></span> Jake Lofthouse ALD Print Ltd |
+        <a href="https://www.aldprint.co.uk" target="_blank">www.aldprint.co.uk</a>
+    </div>
 
 <div id="buttons">
     <input type="button" id="backButton" onclick="goBack()" value="Back" style="display: none; font-size: 45px; margin-right: 10px; ">
@@ -399,6 +399,20 @@
             };
         };
     }
+
+     // Function to get the current year
+        function getCurrentYear() {
+            return new Date().getFullYear();
+        }
+
+        // Function to update the copyright year
+        function updateCopyrightYear() {
+            document.getElementById('copyrightYear').textContent = getCurrentYear();
+        }
+
+        // Call the function to update the copyright year
+        updateCopyrightYear();
+    
 </script>
 
 <div id="animated-bg"></div>
