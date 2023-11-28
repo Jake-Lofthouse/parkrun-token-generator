@@ -89,8 +89,8 @@ button:hover span:after {
     </style>
 </head>
 <body>
-            <div id="uiCopyright">
-        &copy; 2023 Jake Lofthouse ALD Print Ltd |
+ <div id="uiCopyright">
+        &copy; <span id="copyrightYear"></span> Jake Lofthouse ALD Print Ltd |
         <a href="https://www.aldprint.co.uk" target="_blank">www.aldprint.co.uk</a>
     </div>
     
@@ -105,6 +105,21 @@ button:hover span:after {
     </div>
 
     <script>
+
+         // Function to get the current year
+        function getCurrentYear() {
+            return new Date().getFullYear();
+        }
+
+        // Function to update the copyright year
+        function updateCopyrightYear() {
+            document.getElementById('copyrightYear').textContent = getCurrentYear();
+        }
+
+        // Call the function to update the copyright year
+        updateCopyrightYear();
+
+        
         function goToBatch() {
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
         }
