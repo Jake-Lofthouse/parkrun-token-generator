@@ -236,7 +236,7 @@
     <p>Input numbers, then press Enter. Once finished, click on Submit to generate the print file.</p>
     <label for="tokenInput">Token Numbers:</label>
     <div id="tokenList" class="token-list"></div>
-    <input type="text" id="tokenInput" name="n" size="4" maxlength="4" onkeydown="handleTokenInput(event)">
+<input type="text" id="tokenInput" name="n" size="4" maxlength="4" onkeydown="handleTokenInput(event)" onpaste="handlePaste(event)">
     <input type="submit" value="Submit" onclick="generateBarcodes();">
 </form>
 
@@ -424,6 +424,52 @@
 
         // Call the function to update the copyright year
         updateCopyrightYear();
+        
+         function handlePaste(event) {
+        // Handle pasted content
+        var clipboardData, pastedData;
+
+        event.stopPropagation();
+        event.preventDefault();
+
+        clipboardData = event.clipboardData || window.clipboardData;
+        pastedData = clipboardData.getData('Text');
+
+        // Split the pasted data into an array of numbers
+        var numbers = pastedData.split(/[,\s]+/);
+
+        // Add each number to the list
+        numbers.forEach(function (number) {
+            if (/^\d+$/.test(number)) {
+                // Add the number to the list
+                addNumberToList(number);
+            }
+        });
+    }
+
+    function addNumberToList(number) {
+        var tokenList = document.getElementById('tokenList');
+
+        var listItem = document.createElement('div');
+        listItem.className = 'token-list-item';
+
+        var tokenSpan = document.createElement('span');
+        tokenSpan.textContent = number;
+        listItem.appendChild(tokenSpan);
+
+        var deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-button';
+        deleteButton.textContent = 'Delete';
+        deleteButton.onclick = function () {
+            listItem.remove();
+        };
+        listItem.appendChild(deleteButton);
+
+        tokenList.appendChild(listItem);
+
+        // Scroll to the bottom of the list
+        tokenList.scrollTop = tokenList.scrollHeight;
+    }
     
 </script>
 
