@@ -254,6 +254,18 @@
 </div>
 <button id="homeButton" onclick="goHome()">Home</button>
 <script>
+    
+    // Function to check if the device is a phone or tablet
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Function to handle redirection based on device type
+        function handleRedirection() {
+            if (isMobile()) {
+                window.location.href = "Device_Not_Supported";
+            }
+        }
 
     function goHome() {
         // Redirect the user to the specified URL
