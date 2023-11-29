@@ -120,6 +120,23 @@ button:hover span:after {
         updateCopyrightYear();
 
         
+        // Function to check if the device is a phone
+        function isPhone() {
+            return window.innerWidth <= 768; // You can adjust this threshold based on your design
+        }
+
+        // Function to handle redirection based on device type
+        function handleRedirection() {
+            if (isPhone()) {
+                window.location.href = "https://www.aldmodels.co.uk/";
+            } else {
+                // If not a phone, proceed with the existing functionality
+                // You can adjust this based on your requirements
+                goToBatch();
+            }
+        }
+
+        
         function goToBatch() {
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
         }
