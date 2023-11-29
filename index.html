@@ -119,22 +119,28 @@ button:hover span:after {
         // Call the function to update the copyright year
         updateCopyrightYear();
 
+
         
-        // Function to check if the device is a phone
-        function isPhone() {
-            return window.innerWidth <= 590; // You can adjust this threshold based on your design
+        // Function to check if the device is a phone or tablet
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
 
         // Function to handle redirection based on device type
         function handleRedirection() {
-            if (isPhone()) {
-                window.location.href = "https://www.aldmodels.co.uk/";
+            if (isMobile()) {
+                window.location.href = "Device_Not_Supported.html";
             } else {
-                // If not a phone, proceed with the existing functionality
-                // You can adjust this based on your requirements
+                // If not a phone or tablet, you can redirect to your existing pages
                 goToBatch();
             }
         }
+
+        // Function to redirect to the Batch Production page
+        function goToBatch() {
+            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
+        }
+
 
         
         function goToBatch() {
