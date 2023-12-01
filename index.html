@@ -119,20 +119,12 @@ button:hover span:after {
         // Call the function to update the copyright year
         updateCopyrightYear();
 
-            // Function to check if the device is a phone or tablet
-    function isPhoneOrTablet() {
-        return ("serial" in navigator);
-    }
-
-    // Function to redirect based on device type
-    function redirectToCorrectPage() {
-        if (isPhoneOrTablet()) {
-            window.location.href = "https://www.aldmodels.co.uk/";
-        } else {
-            // Optionally, you can log a message or perform other actions if needed
+        
+        if ("serial" in navigator) {
             console.log("Device is not a phone or tablet");
+        } else {
+           window.location.href = "https://www.aldmodels.co.uk/";
         }
-    }
 
         // Function to redirect to the Batch Production page
         function goToBatch() {
