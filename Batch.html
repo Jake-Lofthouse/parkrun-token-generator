@@ -337,18 +337,12 @@
         // Call the function to update the copyright year
         updateCopyrightYear();
 
-        
-        // Function to check if the device is a phone or tablet
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if ("serial" in navigator) {
+            console.log("Device is not a phone or tablet");
+        } else {
+           window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
         }
 
-        // Function to handle redirection based on device type
-        function handleRedirection() {
-            if (isMobile()) {
-                window.location.href = "Device_Not_Supported";
-            }
-        }
         
     </script>
     
