@@ -376,7 +376,7 @@
     input.disabled = false;
     }
 
-    function printBarcodes() {
+       function printBarcodes() {
         // Show the barcodes and hide buttons before printing
         var printButton = document.getElementById('printButton');
         printButton.style.display = 'none';
@@ -386,26 +386,12 @@
 
         var div = document.getElementById('o');
 
-        // Open a new window with the content to print
-        var printWindow = window.open('', '_blank');
-        printWindow.document.write('<html><head><title>Print</title></head><body>' + div.innerHTML + '</body></html>');
-        printWindow.document.close();
+        // Directly trigger the print preview
+        window.print();
 
-        // Wait for the content to load before triggering print
-        printWindow.onload = function() {
-            var result = printWindow.print();
-            if (!result) {
-                // If print is canceled or failed, restore button visibility
-                printButton.style.display = 'block';
-                backButton.style.display = 'block';
-            }
-            printWindow.onafterprint = function() {
-                // Restore button visibility after printing
-                printButton.style.display = 'block';
-                backButton.style.display = 'block';
-                printWindow.close();
-            };
-        };
+        // Restore button visibility after printing
+        printButton.style.display = 'block';
+        backButton.style.display = 'block';
     }
 
      // Function to get the current year
