@@ -6,107 +6,86 @@
     <meta property="og:type" content="website" />
     <link rel="shortcut icon" type="image/x.icon" href="favicon.ico?">
     <style>
-    
     body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            background: #f0f0f0; /* Fallback color */
-            background: linear-gradient(45deg, #3498db, #2ecc71, #e74c3c, #3498db);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+        background: #f0f0f0 url('Background.png') center/cover no-repeat; /* Set the path to your background image */
+    }
 
-        h1 {
-            color: #fff;
-            text-align: center;
-        }
-        
-        #uiCopyright {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            font-size: 14px;
-            color: #666;
-        }
+    h1 {
+        color: #fff;
+        text-align: center;
+    }
 
-button {
-  border-radius: 4px;
-  background-color: #3498db;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 20px;
-  width: 300px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
+    #uiCopyright {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        font-size: 14px;
+        color: #666;
+    }
 
-button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
+    button {
+        border-radius: 4px;
+        background-color: #3498db;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 28px;
+        padding: 20px;
+        width: 300px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
 
-button span:after {
-  content: '\25B6';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
+    button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
 
-button:hover span {
-  padding-right: 25px;
-}
+    button span:after {
+        content: '\25B6';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
 
-button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
+    button:hover span {
+        padding-right: 25px;
+    }
 
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
+    button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
     </style>
 </head>
 <body>
- <div id="uiCopyright">
+    <div id="uiCopyright">
         &copy; <span id="copyrightYear"></span> Jake Lofthouse ALD Print Ltd |
         <a href="https://www.aldprint.co.uk" target="_blank">www.aldprint.co.uk</a>
     </div>
-    
-    <div id="animated-bg"></div>
 
     <div>
         <h1>Select one of the options below:</h1>
 
-<button id="batchButton" onclick="goToBatch()"><span>Batch Production</span></button>
-<button id="oddButton" onclick="goToOdd()"><span>Arbitrary Numbers</span></button>
-
+        <button id="batchButton" onclick="goToBatch()"><span>Batch Production</span></button>
+        <button id="oddButton" onclick="goToOdd()"><span>Arbitrary Numbers</span></button>
     </div>
 
     <script>
-
-         // Function to get the current year
+        // Function to get the current year
         function getCurrentYear() {
             return new Date().getFullYear();
         }
@@ -119,20 +98,13 @@ button:hover span:after {
         // Call the function to update the copyright year
         updateCopyrightYear();
 
-        
         if ("serial" in navigator) {
             console.log("Device is not a phone or tablet");
         } else {
-           window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
+            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
         }
 
         // Function to redirect to the Batch Production page
-        function goToBatch() {
-            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
-        }
-
-
-        
         function goToBatch() {
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
         }
