@@ -6,6 +6,7 @@
     <meta property="og:type" content="website" />
     <link rel="shortcut icon" type="image/x.icon" href="favicon.ico?">
     <style>
+    
     body {
         margin: 0;
         padding: 0;
@@ -69,12 +70,38 @@
         opacity: 1;
         right: 0;
     }
+    
+    .loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the background color and opacity */
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.loading-screen img {
+    width: 100px; /* Adjust the width of the loading icon */
+    height: 100px; /* Adjust the height of the loading icon */
+}
     </style>
 </head>
 <body>
     <div id="uiCopyright">
         &copy; <span id="copyrightYear"></span> Jake Lofthouse ALD Print Ltd
     </div>
+    
+    <div class="loading-screen">
+        <img src="loading.gif" alt="Loading...">
+    </div>
+    
+    <script src="script.js"></script>
 
     <div>
         <h1>Select one of the options below:</h1>
@@ -111,6 +138,17 @@
         function goToOdd() {
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Arbitrary";
         }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+    // Hide the loading screen when the page is fully loaded
+    window.addEventListener("load", function() {
+        var loadingScreen = document.querySelector(".loading-screen");
+        loadingScreen.style.opacity = 0;
+        setTimeout(function() {
+            loadingScreen.style.display = "none";
+        }, 500); // Adjust the duration of the fade-out animation
+    });
+});
     </script>
 </body>
 </html>
