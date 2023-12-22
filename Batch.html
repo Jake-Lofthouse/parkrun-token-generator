@@ -99,7 +99,7 @@
         #buttons button {
             background-color: #3498db;
             color: #fff;
-            padding: 50px 100px; /* Really big padding for really big buttons */
+            padding: 50px 100px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -136,7 +136,6 @@
             }
         }
 
-        /* Add a class to show the animated background when UI is enabled */
         .ui-enabled #animated-bg {
             display: block;
         }
@@ -245,6 +244,7 @@
         }
 
         function printResults() {
+            setOpacity('1');
             window.print();
         }
 
@@ -276,7 +276,8 @@
             }
 
             var div = document.getElementById('o');
-            div.style.opacity = '1';
+          //
+            div.style.opacity = '0';
 
             hideUI(); // Hide the UI when processing results
 
@@ -287,10 +288,20 @@
 
             showButtons(); // Show buttons when barcodes are generated
         }
+        
+        function setOpacity(opacityValue) {
+    var div = document.getElementById('o');
+    div.style.opacity = opacityValue;
+}
 
         function isValidNumber(value) {
             return !isNaN(value) && parseInt(value) > 0;
         }
+        
+        window.addEventListener('afterprint', function () {
+            setOpacity('0');
+        });
+        
     function backButtonPressed() {
         // Recover the values that the user inputted before pressing submit
         var startNumber = document.getElementById('startNumber').value;
@@ -303,7 +314,7 @@
         clearResults(); // Clear results as per your existing logic
     }
     
-             // Function to get the current year
+    // Function to get the current year
         function getCurrentYear() {
             return new Date().getFullYear();
         }
