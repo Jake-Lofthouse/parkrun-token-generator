@@ -211,7 +211,7 @@
     <p>Input numbers, then press Enter. Once finished, click on Submit to generate the print file.</p>
     <label for="tokenInput">Token Numbers:</label>
     <div id="tokenList" class="token-list"></div>
-<input type="text" id="tokenInput" name="n" size="4" maxlength="4" onkeydown="handleTokenInput(event)" onpaste="handlePaste(event)">
+<input type="text" id="tokenInput" name="n" size="4" maxlength="4" placeholder="Enter missing token number here. Press Enter after each number." onkeydown="handleTokenInput(event)" onpaste="handlePaste(event)">
     <input type="submit" value="Submit" onclick="generateBarcodes();">
 </form>
 
