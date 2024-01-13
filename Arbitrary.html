@@ -230,11 +230,18 @@
 
     <script>
     
+    
     if ("serial" in navigator) {
             console.log("Device is not a phone or tablet");
         } else {
            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
         }
+
+    fetch('menu.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('menuContainer').innerHTML = html;
+    });
 
     function goHome() {
         // Redirect the user to the specified URL
@@ -328,13 +335,8 @@
     var div = document.getElementById('o');
     div.innerHTML = '';
 
-    // Show coffee and copyright
+    // Show copyright
     var coffee = document.createElement('script');
-    coffee.setAttribute('data-name', 'BMC-Widget');
-    coffee.setAttribute('data-cfasync', 'false');
-    coffee.setAttribute('src', 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js');
-    coffee.setAttribute('data-id', 'jakelofthouse');
-    coffee.setAttribute('data-description', 'Support me on Buy me a coffee!');
     coffee.setAttribute('data-message', '');
     coffee.setAttribute('data-color', '#40DCA5');
     coffee.setAttribute('data-position', 'Right');
