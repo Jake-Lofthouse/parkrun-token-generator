@@ -240,11 +240,12 @@
            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
         }
 
+    // Fetch and include menu.html
     fetch('menu.html')
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById('menuContainer').innerHTML = html;
-    });
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('menuContainer').innerHTML = html;
+      });
 
     function goHome() {
         // Redirect the user to the specified URL
