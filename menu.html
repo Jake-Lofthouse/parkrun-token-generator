@@ -1,6 +1,4 @@
 <!-- menu.html -->
-<link rel="stylesheet" href="menu.css">
-
 <nav id="menu">
   <ul>
     <li><a href="page1.html">Page 1</a></li>
@@ -8,3 +6,44 @@
     <li><a href="page3.html">Page 3</a></li>
   </ul>
 </nav>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+
+  #menu {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  #menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  #menu ul li {
+    margin: 0 15px;
+  }
+
+  #menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+
+  #menu a:hover {
+    color: #ecf0f1;
+  }
+</style>
