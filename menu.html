@@ -1,0 +1,21 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var menuContainer = document.getElementById('menuContainer');
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      menuContainer.innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "menu.html", true);
+  xhttp.send();
+});
+</script>
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
