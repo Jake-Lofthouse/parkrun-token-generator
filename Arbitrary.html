@@ -448,21 +448,7 @@
         // Scroll to the bottom of the list
         tokenList.scrollTop = tokenList.scrollHeight;
     }
-
-function extractNumbersFromURL() {
-    var url = window.location.href;
-    var matches = url.match(/\/(\d+)/g);
-    if (matches) {
-        matches.forEach(function(match) {
-            var number = match.replace(/\D/g, ''); // Remove non-digit characters
-            addNumberToList(number);
-        });
-    }
-}
-
-// Call the function to extract numbers from the URL
-extractNumbersFromURL();
-        
+       
 
 </script>
 
