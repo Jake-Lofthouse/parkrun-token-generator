@@ -57,18 +57,17 @@
     </div>
 
     <script>
-
-        if ("serial" in navigator) {
-            console.log("Device is not a phone or tablet");
+        // Check if the current URL matches the expected pattern
+        var currentURL = window.location.href;
+        var expectedPattern = /\/(\d+)/g; // Adjust this pattern as needed
+        if (!expectedPattern.test(currentURL)) {
+            console.log("Current URL doesn't match expected pattern. Skipping redirection.");
         } else {
-           window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
+            // Perform the redirection
+            setTimeout(function () {
+                window.location.href = 'https://ald-models.github.io/ParkRun-Barcode/';
+            }, 2500); // Redirect after 3 seconds
         }
-
-        
-        // You can add any redirect logic here if needed
-        setTimeout(function () {
-            window.location.href = 'https://ald-models.github.io/ParkRun-Barcode/';
-        }, 2500); // Redirect after 3 seconds
     </script>
 </body>
 
