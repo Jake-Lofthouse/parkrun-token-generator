@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +51,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="loading-overlay">
         <div class="loading-text">Loading</div>
@@ -60,14 +58,11 @@
             <div class="progress-bar"></div>
         </div>
     </div>
-
     <script>
-        // Hide the loading overlay when the page is fully loaded
+        // Send message to parent window when iframe content is fully loaded
         window.addEventListener('load', function() {
-            var loadingOverlay = document.querySelector('.loading-overlay');
-            loadingOverlay.style.display = 'none';
+            parent.postMessage('loaded', '*');
         });
     </script>
 </body>
-
 </html>
