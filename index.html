@@ -87,6 +87,14 @@
     </div>
 
     <script>
+    // Listen for message from iframe indicating content is loaded
+        window.addEventListener('message', function(event) {
+            if (event.data === 'loaded') {
+                // Hide the loading overlay iframe
+                document.getElementById('loadingFrame').style.display = 'none';
+            }
+        });
+        
         // Function to get the current year
         function getCurrentYear() {
             return new Date().getFullYear();
