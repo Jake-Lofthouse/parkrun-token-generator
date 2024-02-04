@@ -59,9 +59,12 @@
         </div>
     </div>
     <script>
-        // Send message to parent window when iframe content is fully loaded
-        window.addEventListener('load', function() {
-            parent.postMessage('loaded', '*');
+        // Listen for message from parent window indicating content is loaded
+        window.addEventListener('message', function(event) {
+            if (event.data === 'parentLoaded') {
+                // Hide the loading overlay
+                document.querySelector('.loading-overlay').style.display = 'none';
+            }
         });
     </script>
 </body>
