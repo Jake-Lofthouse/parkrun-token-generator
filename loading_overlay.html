@@ -60,6 +60,14 @@
             <div class="progress-bar"></div>
         </div>
     </div>
+
+    <script>
+        // Hide the loading overlay when the page is fully loaded
+        window.addEventListener('load', function() {
+            var loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>
