@@ -123,7 +123,7 @@
     }
 
     /* Mobile styles */
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 1500px) {
         button {
             width: 80%; /* Adjust button width for mobile */
             font-size: 24px; /* Adjust font size for mobile */
@@ -191,10 +191,10 @@ function adjustButtonStyles() {
     var styleTag = document.createElement('style');
     styleTag.innerHTML = '';
 
-    if (screenWidth <= 850) {
+    if (screenWidth <= 1500) {
         // Add CSS rule for smaller screens
         styleTag.innerHTML += `
-            @media only screen and (max-width: 850px) {
+            @media only screen and (max-width: 1500px) {
                 button {
                     width: 80%; /* Adjust button width for mobile */
                     font-size: 24px; /* Adjust font size for mobile */
