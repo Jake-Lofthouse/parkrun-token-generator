@@ -121,6 +121,18 @@
         font-family: 'Arial', sans-serif; /* Set font to 'Arial', sans-serif */
         margin-bottom: 10px;
     }
+
+    /* Mobile styles */
+    @media only screen and (max-width: 600px) {
+        button {
+            width: 80%; /* Adjust button width for mobile */
+            font-size: 24px; /* Adjust font size for mobile */
+        }
+
+        button span:after {
+            display: none; /* Hide the arrow icon on mobile */
+        }
+    }
     </style>
 </head>
 <body>
@@ -163,11 +175,6 @@
             loadingOverlay.style.display = 'none';
         });
 
-        if ("serial" in navigator) {
-            console.log("Device is not a phone or tablet");
-        } else {
-            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
-        }
 
         // Function to redirect to the Batch Production page
         function goToBatch() {
@@ -177,11 +184,46 @@
         function goToOdd() {
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Arbitrary";
         }
-    </script>
-   
-</body>
-</html>
+        
+        // Function to adjust button styles based on screen width
+function adjustButtonStyles() {
+    var screenWidth = window.innerWidth;
+    var styleTag = document.createElement('style');
+    styleTag.innerHTML = '';
 
+    if (screenWidth <= 850) {
+        // Add CSS rule for smaller screens
+        styleTag.innerHTML += `
+            @media only screen and (max-width: 850px) {
+                button {
+                    width: 80%; /* Adjust button width for mobile */
+                    font-size: 24px; /* Adjust font size for mobile */
+                    margin: 10px auto; /* Center the buttons */
+                    display: block; /* Ensure buttons are displayed as blocks */
+                }
+            }
+        `;
+    }
+
+    // Add the style tag to the document head
+    document.head.appendChild(styleTag);
+}
+
+// Call the function initially
+adjustButtonStyles();
+
+// Listen for orientation change events and adjust button styles accordingly
+window.addEventListener('orientationchange', function() {
+    // Remove previous style tag if exists
+    var styleTag = document.querySelector('#buttonStyles');
+    if (styleTag) {
+        styleTag.parentNode.removeChild(styleTag);
+    }
+    // Adjust button styles
+    adjustButtonStyles();
+});
+
+    </script>
    
 </body>
 </html>
