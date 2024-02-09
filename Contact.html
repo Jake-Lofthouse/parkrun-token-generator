@@ -82,6 +82,16 @@
         font-family: 'Arial', sans-serif; /* Set font to 'Arial', sans-serif */
         margin-bottom: 10px;
     }
+
+    /* Adjustments for the form */
+    #formContainer {
+        position: fixed;
+        top: 60px; /* Adjust as needed based on the height of your menu bar */
+        left: 0;
+        width: 100%;
+        height: calc(100% - 60px); /* Adjust as needed */
+        z-index: 1;
+    }
       </style>
 </head>
 <body>
@@ -95,15 +105,15 @@
 
     <div id="uiCopyright">
         &copy; <span id="copyrightYear"></span> Jake Lofthouse ALD Print Ltd
-        
     </div>
 
-    <iframe src="menu.html" frameborder="0" style="width:100%; height:100%; position:fixed; top:0; left:0;"></iframe>
+    <iframe src="menu.html" frameborder="0" style="width:100%; height:60px; position:fixed; top:0; left:0;"></iframe>
 
-  <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
-  <iframe width="100%" height="100%" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__tNkQhJUQlUxTUZMN0U3MUQ5R0ZGTjRFNDBVNlNGNS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none;"></iframe>
-</div>
-<script>
+    <div id="formContainer">
+        <iframe width="100%" height="100%" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__tNkQhJUQlUxTUZMN0U3MUQ5R0ZGTjRFNDBVNlNGNS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none;"></iframe>
+    </div>
+
+    <script>
     // Function to get the current year
         function getCurrentYear() {
             return new Date().getFullYear();
@@ -128,6 +138,6 @@
         } else {
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
         }
-  </script>
+    </script>
 </body>
 </html>
