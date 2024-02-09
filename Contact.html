@@ -103,6 +103,31 @@
   <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
   <iframe width="100%" height="100%" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__tNkQhJUQlUxTUZMN0U3MUQ5R0ZGTjRFNDBVNlNGNS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none;"></iframe>
 </div>
-  
+<script>
+    // Function to get the current year
+        function getCurrentYear() {
+            return new Date().getFullYear();
+        }
+
+        // Function to update the copyright year
+        function updateCopyrightYear() {
+            document.getElementById('copyrightYear').textContent = getCurrentYear();
+        }
+
+        // Call the function to update the copyright year
+        updateCopyrightYear();
+
+            // Hide the loading overlay when the page is fully loaded
+        window.addEventListener('load', function() {
+            var loadingOverlay = document.querySelector('.loading-overlay');
+            loadingOverlay.style.display = 'none';
+        });
+    
+    if ("serial" in navigator) {
+            console.log("Device is not a phone or tablet");
+        } else {
+            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
+        }
+  </script>
 </body>
 </html>
