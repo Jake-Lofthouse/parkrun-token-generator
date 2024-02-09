@@ -21,7 +21,6 @@
     h1 {
         color: #fff;
         text-align: center;
-        font-size: 48px; /* Adjust font size for larger screens */
     }
 
     #uiCopyright {
@@ -43,7 +42,7 @@
         width: 300px;
         transition: all 0.5s;
         cursor: pointer;
-        margin: 5px auto; /* Center the buttons horizontally */
+        margin: 5px;
     }
 
     button span {
@@ -122,16 +121,6 @@
         font-family: 'Arial', sans-serif; /* Set font to 'Arial', sans-serif */
         margin-bottom: 10px;
     }
-
-    /* Mobile styles */
-    @media only screen and (max-width: 1500px) {
-        button {
-            width: 80%; /* Adjust button width for mobile */
-            font-size: 32px; /* Adjust font size for mobile */
-            margin: 10px auto; /* Center the buttons horizontally */
-            display: block; /* Ensure buttons are displayed as blocks */
-        }
-    }
     </style>
 </head>
 <body>
@@ -174,6 +163,12 @@
             loadingOverlay.style.display = 'none';
         });
 
+        if ("serial" in navigator) {
+            console.log("Device is not a phone or tablet");
+        } else {
+            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
+        }
+
         // Function to redirect to the Batch Production page
         function goToBatch() {
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
@@ -183,6 +178,10 @@
             window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Arbitrary";
         }
     </script>
+   
+</body>
+</html>
+
    
 </body>
 </html>
