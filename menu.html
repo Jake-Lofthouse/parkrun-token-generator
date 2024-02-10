@@ -83,10 +83,10 @@
     </div>
     <nav>
         <ul>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/')">Home</a></li>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Arbitrary')">Arbitrary</a></li>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Batch')">Batch</a></li>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Contact')">Contact Us</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/', 'Home')">Home</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Arbitrary', 'Arbitrary')">Arbitrary</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Batch', 'Batch')">Batch</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Contact', 'Contact Us')">Contact Us</a></li>
         </ul>
     </nav>
 </header>
@@ -94,7 +94,8 @@
 <iframe id="myFrame" src="menu.html"></iframe>
 
 <script>
-    function changePage(url) {
+    function changePage(url, pageTitle) {
+        window.parent.history.pushState({}, pageTitle, url);
         document.getElementById('myFrame').src = url;
     }
 </script>
