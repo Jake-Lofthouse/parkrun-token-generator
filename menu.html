@@ -65,6 +65,14 @@
         main {
             padding: 20px;
         }
+        iframe {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -75,15 +83,21 @@
     </div>
     <nav>
         <ul>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/">Home</a></li>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/Arbitrary">Arbitrary</a></li>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/Batch">Batch</a></li>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/Contact">Contact Us</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/')">Home</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Arbitrary')">Arbitrary</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Batch')">Batch</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Contact')">Contact Us</a></li>
         </ul>
     </nav>
 </header>
 
-<!-- Your button animations or other content can go here -->
+<iframe id="myFrame" src="menu.html"></iframe>
+
+<script>
+    function changePage(url) {
+        document.getElementById('myFrame').src = url;
+    }
+</script>
 
 </body>
 </html>
