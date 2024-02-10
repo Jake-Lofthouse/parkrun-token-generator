@@ -67,10 +67,7 @@
         }
         iframe {
             width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
+            height: calc(100% - 60px); /* Adjust for header height */
             border: none;
         }
         button {
@@ -94,26 +91,19 @@
     </div>
     <nav>
         <ul>
-            <li><button onclick="goToHome()"><span>Home</span></button></li>
-            <li><button onclick="goToArbitrary()"><span>Arbitrary</span></button></li>
-            <li><button onclick="goToBatch()"><span>Batch Production</span></button></li>
-            <li><button onclick="goToContact()"><span>Contact Us</span></button></li>
+            <li><button onclick="changePage('menu.html')"><span>Home</span></button></li>
+            <li><button onclick="changePage('arbitrary.html')"><span>Arbitrary</span></button></li>
+            <li><button onclick="changePage('batch.html')"><span>Batch Production</span></button></li>
+            <li><button onclick="changePage('contact.html')"><span>Contact Us</span></button></li>
         </ul>
     </nav>
 </header>
 
+<iframe id="iframe" src="menu.html" frameborder="0"></iframe>
+
 <script>
-    function goToHome() {
-        parent.location.href = "https://ald-models.github.io/ParkRun-Barcode";
-    }
-    function goToArbitrary() {
-        parent.location.href = "https://ald-models.github.io/ParkRun-Barcode/Arbitrary";
-    }
-    function goToBatch() {
-        parent.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
-    }
-    function goToContact() {
-        parent.location.href = "https://ald-models.github.io/ParkRun-Barcode/Contact";
+    function changePage(url) {
+        document.getElementById('iframe').src = url;
     }
 </script>
 
