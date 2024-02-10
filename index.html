@@ -28,7 +28,10 @@
         bottom: 10px;
         left: 10px;
         font-size: 14px;
-        color: #2C2947;
+        color: #FFFFFF;
+        background-color: #2C2947;
+        padding: 5px 10px;
+        border-radius: 10px; /* Rounded box */
     }
 
     button {
@@ -122,35 +125,6 @@
         margin-bottom: 10px;
     }
     
-    /* New style for the logo */
-    #logo {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 300px; /* Adjust the width of the logo */
-        height: auto; /* Maintain aspect ratio */
-    }
-
-    /* New style for the contact button */
-    #contactButton {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        border-radius: 4px;
-        background-color: #2C2947;
-        border: none;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 18px;
-        padding: 10px;
-        transition: all 0.5s;
-        cursor: pointer;
-    }
-
-    #contactButton:hover {
-        background-color: #524f7e; /* Change color on hover */
-    }
-    
     </style>
 </head>
 <body>
@@ -162,12 +136,6 @@
             <div class="progress-bar"></div>
         </div>
     </div>
-
-    <!-- Logo -->
-    <img id="logo" src="logo.png" alt="Logo">
-
-    <!-- Contact Us button -->
-    <button id="contactButton" onclick="window.location.href = 'https://forms.office.com/r/D0qqtsXS5i';">Contact Us</button>
 
     <div id="uiCopyright">
         &copy; <span id="copyrightYear"></span> Jake Lofthouse ALD Print Ltd
