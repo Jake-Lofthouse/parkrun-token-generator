@@ -73,30 +73,51 @@
             left: 0;
             border: none;
         }
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+            padding: 0;
+        }
+        button:hover span {
+            color: #ffd700;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo">
-        <img src="logo.png" alt="Your Logo">
+        <img src="logo.png">
     </div>
     <nav>
         <ul>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/', event)">Home</a></li>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Arbitrary', event)">Arbitrary</a></li>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Batch', event)">Batch</a></li>
-            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Contact', event)">Contact Us</a></li>
+            <li><button onclick="goToHome()"><span>Home</span></button></li>
+            <li><button onclick="goToArbitrary()"><span>Arbitrary</span></button></li>
+            <li><button onclick="goToBatch()"><span>Batch Production</span></button></li>
+            <li><button onclick="goToContact()"><span>Contact Us</span></button></li>
         </ul>
     </nav>
 </header>
-
-<iframe id="myFrame" src="menu.html"></iframe>
 
 <script>
     function changePage(url, event) {
         event.preventDefault();
         window.location.href = url;
+    }
+    function goToHome() {
+        window.location.href = "https://ald-models.github.io/ParkRun-Barcode";
+    }
+    function goToArbitrary() {
+        window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Arbitrary";
+    }
+    function goToBatch() {
+        window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
+    }
+    function goToContact() {
+        window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Contact";
     }
 </script>
 
