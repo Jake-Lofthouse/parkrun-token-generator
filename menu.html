@@ -95,8 +95,7 @@
 
 <script>
     function changePage(url, pageTitle) {
-        window.parent.history.pushState({}, pageTitle, url);
-        document.getElementById('myFrame').src = url;
+        window.location.href = url;
     }
 </script>
 
