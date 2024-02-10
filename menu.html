@@ -83,16 +83,19 @@
     </div>
     <nav>
         <ul>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/">Home</a></li>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/Arbitrary">Arbitrary</a></li>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/Batch">Batch</a></li>
-            <li><a href="https://ald-models.github.io/ParkRun-Barcode/Contact">Contact Us</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/', event)">Home</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Arbitrary', event)">Arbitrary</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Batch', event)">Batch</a></li>
+            <li><a href="#" onclick="changePage('https://ald-models.github.io/ParkRun-Barcode/Contact', event)">Contact Us</a></li>
         </ul>
     </nav>
 </header>
 
+<iframe id="myFrame" src="menu.html"></iframe>
+
 <script>
-    function changePage(url) {
+    function changePage(url, event) {
+        event.preventDefault();
         window.location.href = url;
     }
 </script>
