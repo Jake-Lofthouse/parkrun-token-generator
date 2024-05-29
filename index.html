@@ -1,71 +1,81 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Prusa Cam Installer</title>
+    <title>Parkrun Token Generator</title>
+    <meta name="keywords" content="Parkrun, Parkrun Generator, Parkrun Tokens, Parkrun Token, Parkrun finish tokens, finish token, parkrun, Parkrun barcode, Barcode generator for parkrun">
     <meta property="og:type" content="website" />
     <link rel="shortcut icon" type="image/x.icon" href="favicon.ico?">
     <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #161819ff;
-            overflow: hidden;
-            background: url('background.jpg') no-repeat center center fixed; /* Fixed background image */
-            background-size: cover;
-        }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+        background: #f0f0f0 url('Background.png') center/cover no-repeat; /* Set the path to your background image */
+    }
 
-        :root {
-            /* Colors */
-            --esp-tools-button-color: #ff7b15;
-        }
+    h1 {
+        color: #2C2947;
+        text-align: center;
+        background-color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px; /* Rounded box */
+    }
 
-        #container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    #uiCopyright {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        font-size: 14px;
+        color: #FFFFFF;
+        background-color: #2C2947;
+        padding: 5px 10px;
+        border-radius: 10px; /* Rounded box */
+    }
 
-        #rounded-box-container {
-            display: flex;
-            justify-content: center;
-            width: 90%; /* Adjust the width as needed */
-            max-width: 600px; /* Limit the maximum width */
-            margin: auto;
-        }
+    button {
+        border-radius: 4px;
+        background-color: #2C2947;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 28px;
+        padding: 20px;
+        width: 300px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
 
-        #rounded-box {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
+    button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
 
-        h1 {
-            color: #333; /* Set text color back to the original color */
-            margin-bottom: 20px;
-        }
+    button span:after {
+        content: '\25B6';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
 
-        #main {
-            display: block;
-        }
+    button:hover span {
+        padding-right: 25px;
+    }
 
-        #notSupported {
-            display: none;
-        }
+    button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
 
-        #logo img {
-            max-width: 20%; /* Make the logo slightly larger */
-            height: auto;
-            /* Remove border-radius */
-        }
-        
     /* Loading overlay styles */
     .loading-overlay {
         position: fixed;
@@ -84,10 +94,10 @@
     .progress-container {
         width: 200px;
         height: 20px;
-        border: 1px solid #ff7b15;
+        border: 1px solid #000;
         position: relative;
         overflow: hidden;
-        background-color: #ff7b15; /* Set progress bar color to black */
+        background-color: #000; /* Set progress bar color to black */
         border-radius: 4px;
         margin-bottom: 20px;
     }
@@ -113,72 +123,35 @@
 
     .loading-text {
         font-size: 24px;
-        color: #ff7b15;
+        color: #000;
         font-family: 'Arial', sans-serif; /* Set font to 'Arial', sans-serif */
         margin-bottom: 10px;
     }
+    
+    /* New style for the contact button */
+    #contactButton {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        border-radius: 4px;
+        background-color: #2C2947;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 18px;
+        padding: 10px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
 
-        .button {
-            display: inline-block;
-            border: none;
-            background-color: var(--esp-tools-button-color);
-            color: #FFFFFF;
-            text-align: center;
-            font-size: 15px;
-            padding: 10px;
-            width: 200px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.5s;
-            margin: 5px;
-            font-family: sans-serif;
-        }
-
-        .button span {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: 0.5s;
-        }
-
-        .button span:after {
-            content: '\00bb';
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            right: -20px;
-            transition: 0.5s;
-        }
-
-        .button:hover span {
-            padding-right: 25px;
-        }
-
-        .button:hover span:after {
-            opacity: 1;
-            right: 0;
-        }
-
-        .powered-by {
-            font-size: 12px;
-            color: var(--esp-tools-button-color); /* Set text color to button color */
-            cursor: pointer;
-            text-decoration: underline;
-            margin-top: 20px; /* Add margin to the top */
-            display: inline-block; /* Display as inline block */
-            padding: 5px; /* Add padding */
-            /* Remove border-radius */
-            transition: color 0.5s; /* Add transition effect for color change */
-        }
-
-        .powered-by:hover {
-            color: #ffb874; /* Change text color on hover to a lighter shade of orange */
-        }
+    #contactButton:hover {
+        background-color: #524f7e; /* Change color on hover */
+    }
+    
     </style>
 </head>
-
 <body>
-    
+
     <!-- Loading overlay -->
     <div class="loading-overlay">
         <div class="loading-text">Loading</div>
@@ -186,53 +159,57 @@
             <div class="progress-bar"></div>
         </div>
     </div>
-    
-    <div id="container">
-        <div id="rounded-box-container">
-            <div id="rounded-box">
-                <div id="logo">
-                    <img src="logo.png" alt="Logo"> <!-- Update the logo source here -->
-                </div>
-                <h1>Prusa Cam Installer</h1>
-                <div id="main">
-                    <script type="module" src="https://unpkg.com/esp-web-tools@7.3.1/dist/web/install-button.js?module"></script>
-                    <esp-web-install-button id="installButton" manifest="webflash/manifest.json"></esp-web-install-button>
-                    <br>
-                    <br>
-                    <span id="noteSpan">NOTE: Make sure to close anything using your device's com port (e.g. Serial monitor)</span>
-                </div>
-                <div class="powered-by" onclick="window.open('https://esphome.github.io/esp-web-tools/', '_blank')">Powered by ESP Web Tools</div>
-            </div>
-        </div>
-    </div>
-       
-    <script>
-        if ("serial" in navigator) {
-            document.getElementById("notSupported").style.display = 'none';
-            document.getElementById("main").style.display = 'block';
-        } else {
-            window.location.href = "https://ald-models.github.io/Prusa-ESP32-Cam-Web-Upload/Not_Supported";
-        }
+
+    <!-- Contact Us button -->
+    <button id="contactButton" onclick="window.location.href = 'https://forms.office.com/r/D0qqtsXS5i';">Contact Us</button>
+
+    <div id="uiCopyright">
+        &copy; <span id="copyrightYear"></span> Jake Lofthouse ALD Print Ltd
         
-    </script>
-    
-    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="JLofthouse" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+    </div>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5VTXMS502E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <div>
+        <h1>Select one of the options below:</h1>
 
-  gtag('config', 'G-5VTXMS502E');
+        <button id="batchButton" onclick="goToBatch()"><span>Batch Production</span></button>
+        <button id="oddButton" onclick="goToOdd()"><span>Arbitrary Numbers</span></button>
+    </div>
 
-// Hide the loading overlay when the page is fully loaded
+    <script>
+        // Function to get the current year
+        function getCurrentYear() {
+            return new Date().getFullYear();
+        }
+
+        // Function to update the copyright year
+        function updateCopyrightYear() {
+            document.getElementById('copyrightYear').textContent = getCurrentYear();
+        }
+
+        // Call the function to update the copyright year
+        updateCopyrightYear();
+
+        // Hide the loading overlay when the page is fully loaded
         window.addEventListener('load', function() {
             var loadingOverlay = document.querySelector('.loading-overlay');
             loadingOverlay.style.display = 'none';
         });
-</script>
-</body>
 
+        if ("serial" in navigator) {
+            console.log("Device is not a phone or tablet");
+        } else {
+            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Not_Supported";
+        }
+
+        // Function to redirect to the Batch Production page
+        function goToBatch() {
+            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Batch";
+        }
+
+        function goToOdd() {
+            window.location.href = "https://ald-models.github.io/ParkRun-Barcode/Arbitrary";
+        }
+    </script>
+   
+</body>
 </html>
